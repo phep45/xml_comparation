@@ -16,7 +16,7 @@ import static com.luxoft.xmlcomparator.XmlMatcherType.noneOf;
 
 public class XmlComparatorTest {
 
-    private XmlComparator xmlComparator = new XmlComparator();
+    private XmlComparator2 xmlComparator2 = new XmlComparator2();
 
     @Test
     public void testMatchers() throws IOException, SAXException {
@@ -33,7 +33,7 @@ public class XmlComparatorTest {
         List<XmlMatcher> xmlMatchers = Arrays.asList(noneOf, any, anyOf, anyOrder);
 
         //when
-        List result = xmlComparator.compareXml(xml1, xml2, xmlMatchers);
+        List result = xmlComparator2.compareXml(xml1, xml2, xmlMatchers);
 
         //then
         Assert.assertEquals("Differences found: " + result, 0, result.size());
