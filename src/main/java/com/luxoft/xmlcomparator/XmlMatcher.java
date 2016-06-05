@@ -23,9 +23,9 @@ public class XmlMatcher {
         this.matcherType = matcherType;
     }
 
-    public boolean filter(Difference difference) {
+    public boolean matches(Difference difference) {
         String xpathRegex = convertXPathToRegex();
-        return matcherType.filter(difference, xpathRegex);
+        return matcherType.matches(difference, xpathRegex);
     }
 
     private String convertXPathToRegex() {

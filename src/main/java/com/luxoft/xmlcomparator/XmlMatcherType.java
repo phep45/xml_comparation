@@ -17,7 +17,7 @@ import static org.apache.commons.lang3.StringUtils.EMPTY;
 public enum XmlMatcherType {
     ANY_OF {
         @Override
-        public boolean filter(Difference difference, String xpathRegex){
+        public boolean matches(Difference difference, String xpathRegex){
             Pattern pattern = Pattern.compile(xpathRegex);
             Matcher matcher = pattern.matcher(difference.toString());
             if (matcher.find()) {
@@ -35,7 +35,7 @@ public enum XmlMatcherType {
     },
     ANY {
         @Override
-        public boolean filter(Difference difference, String xpathRegex){
+        public boolean matches(Difference difference, String xpathRegex){
             Pattern pattern = Pattern.compile(xpathRegex);
             Matcher matcher = pattern.matcher(difference.toString());
             return !matcher.find();
@@ -43,7 +43,7 @@ public enum XmlMatcherType {
     },
     NONE_OF {
         @Override
-        public boolean filter(Difference difference, String xpathRegex){
+        public boolean matches(Difference difference, String xpathRegex){
             Pattern pattern = Pattern.compile(xpathRegex);
             Matcher matcher = pattern.matcher(difference.toString());
             if (matcher.find()) {
@@ -81,6 +81,6 @@ public enum XmlMatcherType {
         return xmlMatcherType;
     }
 
-    public abstract boolean filter(Difference difference, String xpathRegex);
+    public abstract boolean matches(Difference difference, String xpathRegex);
 
 }
