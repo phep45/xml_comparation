@@ -28,11 +28,7 @@ public enum XmlMatcherType {
                 while (insideMatcher.find()) {
                     vals.add(insideMatcher.group());
                 }
-                if(whiteList.contains(vals.get(ACTUAL_VALUE).replaceAll(APOSTROPHE, EMPTY))) {
-                    return false;
-                } else {
-                    return true;
-                }
+                return !whiteList.contains(vals.get(ACTUAL_VALUE).replaceAll(APOSTROPHE, EMPTY));
             }
             return true;
         }
@@ -42,10 +38,7 @@ public enum XmlMatcherType {
         public boolean filter(Difference difference, String xpathRegex){
             Pattern pattern = Pattern.compile(xpathRegex);
             Matcher matcher = pattern.matcher(difference.toString());
-            if (matcher.find()) {
-                return false;
-            }
-            return true;
+            return !matcher.find();
         }
     },
     NONE_OF {
@@ -61,11 +54,7 @@ public enum XmlMatcherType {
                 while (insideMatcher.find()) {
                     vals.add(insideMatcher.group());
                 }
-                if(blackList.contains(vals.get(ACTUAL_VALUE).replaceAll(APOSTROPHE, EMPTY))) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return blackList.contains(vals.get(ACTUAL_VALUE).replaceAll(APOSTROPHE, EMPTY));
             }
             return true;
         }
@@ -73,11 +62,6 @@ public enum XmlMatcherType {
 
     protected List<String> whiteList = new ArrayList<>();
     protected List<String> blackList = new ArrayList<>();
-
-    private boolean everythingAllowed;
-
-    private XmlMatcherType() {
-    }
 
     public static XmlMatcherType anyOf(String ... vals) {
         XmlMatcherType xmlMatcherType = ANY_OF;
@@ -87,9 +71,7 @@ public enum XmlMatcherType {
     }
 
     public static XmlMatcherType any() {
-        XmlMatcherType xmlMatcherType = ANY;
-        xmlMatcherType.everythingAllowed = true;
-        return xmlMatcherType;
+        return ANY;
     }
 
     public static XmlMatcherType noneOf(String ... vals) {
@@ -100,17 +82,5 @@ public enum XmlMatcherType {
     }
 
     public abstract boolean filter(Difference difference, String xpathRegex);
-
-    public List<String> getWhiteList() {
-        return whiteList;
-    }
-
-    public List<String> getBlackList() {
-        return blackList;
-    }
-
-    public boolean isEverythingAllowed() {
-        return everythingAllowed;
-    }
 
 }
