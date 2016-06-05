@@ -22,8 +22,8 @@ public class XmlComparatorTest {
     public void testMatchers() throws IOException, SAXException {
 
         //given
-        String xml1 = FileUtils.readFileToString(new File("src/main/resources/file_1.xml"));
-        String xml2 = FileUtils.readFileToString(new File("src/main/resources/file_2.xml"));
+        String xml1 = FileUtils.readFileToString(new File("src/test/resources/file_1.xml"));
+        String xml2 = FileUtils.readFileToString(new File("src/test/resources/file_2.xml"));
 
         XmlMatcher anyOf = new XmlMatcher("/transaction/sec-id/text()", anyOf("600", "500"));
         XmlMatcher noneOf = new XmlMatcher("/transaction/tran-id/text()", noneOf("1000", "2000"));
@@ -33,7 +33,7 @@ public class XmlComparatorTest {
         List<XmlMatcher> xmlMatchers = Arrays.asList(noneOf, any, anyOf, anyOrder);
 
         //when
-        List result = xmlComparator.compareXml(xml1, xml2, xmlMatchers);
+        List result = xmlComparator.compareXml(xml1, xml2, xmlMatchers, true);
 
         //then
         Assert.assertEquals("Differences found: " + result, 0, result.size());
