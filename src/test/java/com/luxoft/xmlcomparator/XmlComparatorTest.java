@@ -33,7 +33,7 @@ public class XmlComparatorTest {
         List<XmlMatcher> xmlMatchers = Arrays.asList(noneOf, any, anyOf, anyOrder);
 
         //when
-        List result = xmlComparator.compareXml(xml1, xml2, xmlMatchers, true);
+        List result = xmlComparator.compareXml(xml1, xml2, xmlMatchers);
 
         //then
         Assert.assertEquals("Differences found: " + result, 0, result.size());
