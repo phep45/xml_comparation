@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class XmlComparator2 extends XMLTestCase {
+public class XmlComparator extends XMLTestCase {
 
     public List compareXml(String control, String test, List<XmlMatcher> matchers) throws IOException, SAXException {
         XMLUnit.setIgnoreWhitespace(true);
