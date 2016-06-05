@@ -37,6 +37,5 @@ public class XmlComparatorTest {
 
         //then
         Assert.assertEquals("Differences found: " + result, 0, result.size());
-
     }
 }
