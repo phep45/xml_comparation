@@ -19,7 +19,7 @@ public class XmlComparator extends XMLTestCase {
         List allDifs = new DetailedDiff(compareXML(control, test)).getAllDifferences();
 
         for(XmlMatcher xmlMatcher : matchers) {
-            allDifs = (List) allDifs.stream().filter(d -> xmlMatcher.filter((Difference) d)).collect(Collectors.toList());
+            allDifs = (List) allDifs.stream().filter(d -> xmlMatcher.matches((Difference) d)).collect(Collectors.toList());
         }
 
         return allDifs;
